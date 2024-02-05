@@ -13,7 +13,7 @@ export default function ProfilePage() {
   const [user, setUser] = useState<IUser>({});
   const logout = async () => {
     try {
-      await axios.get("/api/users/logout");
+      await axios.get(`${process.env.DOMAIN}/api/users/logout`);
       toast.success("Logout successful");
       router.push("/login");
     } catch (error: any) {
@@ -45,7 +45,7 @@ export default function ProfilePage() {
         {!user ? (
           "Nothing"
         ) : (
-          <Link href={`/profile/${user?.username}`}>{user?.username}</Link>
+          <Link href={`/profile/${user?._id}`}>{user?.username}</Link>
         )}
       </h2>
       <hr />
