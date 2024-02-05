@@ -13,9 +13,12 @@ export default function ProfilePage() {
   const [user, setUser] = useState<IUser>({});
   const logout = async () => {
     try {
-      await axios.get(`${process.env.DOMAIN}/api/users/logout`);
-      toast.success("Logout successful");
-      router.push("/login");
+      const { status } = await axios.get("/api/users/logout");
+      console.log("logout status is", status);
+      if (status === 200) {
+        toast.success("Logout successful");
+        router.push("/login");
+      }
     } catch (error: any) {
       console.log(error.message);
       toast.error(error.message);
